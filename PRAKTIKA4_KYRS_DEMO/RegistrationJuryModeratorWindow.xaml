@@ -1,0 +1,129 @@
+﻿<Window x:Class="PRAKTIKA4_KYRS_DEMO.RegistrationJuryModeratorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PRAKTIKA4_KYRS_DEMO"
+        mc:Ignorable="d"
+        Title="Добавление жюри/модератора" MinHeight="550" MinWidth="900"
+    Background="White"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.ColumnSpan="2"
+                   Text="Регистрация жюри/модератора"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+        <!-- Левая часть формы -->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- IdNumber -->
+            <TextBlock Text="Id Number:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBlock Text="13002" FontStyle="Italic" Background="#D9D9D9"
+                       Grid.Row="0" Grid.Column="1" Padding="5" Margin="0,5"/>
+
+            <!-- ФИО -->
+            <TextBlock Text="ФИО:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5"/>
+
+            <!-- Пол -->
+            <TextBlock Text="Пол:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,5">
+                <ComboBoxItem Content="Мужской"/>
+                <ComboBoxItem Content="Женский"/>
+            </ComboBox>
+
+            <!-- Роль -->
+            <TextBlock Text="Роль:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,5">
+                <ComboBoxItem Content="Жюри"/>
+                <ComboBoxItem Content="Модератор"/>
+            </ComboBox>
+
+            <!-- Email -->
+            <TextBlock Text="Email:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,5"/>
+
+            <!-- Телефон -->
+            <TextBlock Text="Телефон:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="0,5" Text="+7(___)___-__-__"/>
+
+            <!-- Направление -->
+            <TextBlock Text="Направление:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Margin="0,5"/>
+
+            <!-- Чекбокс -->
+            <CheckBox Grid.Row="7" Grid.Column="1" Margin="0,5" Content="Прикрепить к мероприятию"/>
+
+            <!-- Мероприятие -->
+            <TextBlock Text="Мероприятие:" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="8" Grid.Column="1" Margin="0,5">
+                <ComboBoxItem Content="Хакатон 2025"/>
+                <ComboBoxItem Content="IT Конференция"/>
+                <ComboBoxItem Content="Бизнес Форум"/>
+            </ComboBox>
+        </Grid>
+
+        <!-- Правая часть формы -->
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+            <!-- Фото -->
+            <Border Width="200" Height="200" BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,15">
+                <TextBlock Text="Фото" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"/>
+            </Border>
+
+            <!-- Пароль -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Пароль:" Width="100" VerticalAlignment="Center"/>
+                <PasswordBox x:Name="pwdPassword" Width="150" Margin="5,0"/>
+            </StackPanel>
+
+            <!-- Повтор пароля -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Text="Повтор пароля:" Width="100" VerticalAlignment="Center"/>
+                <PasswordBox x:Name="pwdConfirm" Width="150" Margin="5,0"/>
+            </StackPanel>
+
+            <!-- Видимый пароль -->
+            <CheckBox Content="Видимый пароль" Margin="0,10,0,0"/>
+        </StackPanel>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" 
+                    HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Ok" Width="80" Height="30" Margin="0,0,10,0" Click="Button_Click_1"/>
+            <Button Content="Отмена" Width="80" Height="30" Click="Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,96 @@
+﻿<Window x:Class="PRAKTIKA4_KYRS_DEMO.OrganizerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PRAKTIKA4_KYRS_DEMO"
+        mc:Ignorable="d"
+        Title="Окно Организатора" MinHeight="550" MinWidth="900"
+        
+    WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.ColumnSpan="2"
+                   Text="Окно Организатора"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   TextAlignment="Center"
+                   Margin="0,0,0,10"/>
+
+        <!-- Левая панель -->
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+            <Border Width="150" Height="180" BorderBrush="#C5C277" BorderThickness="1" Margin="0,0,0,15">
+                <TextBlock Text="Фото" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" 
+                           FontSize="16"/>
+            </Border>
+
+            <Button Content="Мой профиль" 
+                    Width="150" Height="50" 
+                    Background="Transparent"
+                    BorderBrush="#C5C277" 
+                    BorderThickness="1" 
+                    FontSize="16"
+                    Cursor="Hand"
+                    Margin="0,10,0,0"
+                    Click="Button_Click_3"/>
+        </StackPanel>
+
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock Text="Доброе утро/день/вечер!" 
+                       FontSize="18" 
+                       FontWeight="Bold" 
+                       HorizontalAlignment="Center" 
+                       Margin="0,10,0,0"/>
+            <TextBlock Text="Ms/Mrs Имя" 
+                       FontSize="16"
+                       HorizontalAlignment="Center"
+                       Margin="0,5,0,20"/>
+
+            <Button Content="Мероприятия" 
+                    Width="220" Height="60" 
+                    FontSize="16"
+                    Background="#F4F4F4"
+                    BorderBrush="#BEBEBE"
+                    BorderThickness="1"
+                    Margin="0,10"
+                    Cursor="Hand"
+                    Click="Button_Click"
+                  />
+
+            <Button Content="Участники" 
+                    Width="220" Height="60" 
+                    FontSize="16"
+                    Background="#F4F4F4"
+                    BorderBrush="#BEBEBE"
+                    BorderThickness="1"
+                    Margin="0,10"
+                    Cursor="Hand"
+                    Click="Button_Click_1"
+                    />
+
+            <Button Content="Жюри" 
+                    Width="220" Height="60" 
+                    FontSize="16"
+                    Background="#F4F4F4"
+                    BorderBrush="#BEBEBE"
+                    BorderThickness="1"
+                    Margin="0,10"
+                    Cursor="Hand"
+                    Click="Button_Click_2"
+                  />
+        </StackPanel>
+    </Grid>
+</Window>
