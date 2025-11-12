@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="161662f72b5940d096a4eb3a427636c7" Name="Diagram1">
+        <EntityTypeShape EntityType="Praktika2222Model.Activity" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.Activity_Event" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.City" Width="1.5" PointX="9" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.Country" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.Direction" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.Event" Width="1.5" PointX="11.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.Event_Activity_Jury" Width="1.5" PointX="13.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.Event_Type_Dictionary" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.Gender" Width="1.5" PointX="3.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.Role" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.TypeofEvent" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Praktika2222Model.User" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="Praktika2222Model.FK_Activity_Event_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Event_Activity_Jury_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Activity_Event_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Activity_Event_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Event_Type_Dictionary_Direction" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Event_Activity_Jury_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Event_Type_Dictionary_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Event_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Event_Activity_Jury_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.FK_Event_Type_Dictionary_TypeofEvent" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.City_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.User_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.User_Direction" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.User_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.User_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Praktika2222Model.User_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

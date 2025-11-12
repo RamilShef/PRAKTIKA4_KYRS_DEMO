@@ -91,6 +91,16 @@
                     Cursor="Hand"
                     Click="Button_Click_2"
                   />
+            <Button Content="Жюри" 
+        Width="220" Height="60" 
+        FontSize="16"
+        Background="#F4F4F4"
+        BorderBrush="#BEBEBE"
+        BorderThickness="1"
+        Margin="0,10"
+        Cursor="Hand"
+        Click="Button_Click_4"
+      />
         </StackPanel>
     </Grid>
 </Window>

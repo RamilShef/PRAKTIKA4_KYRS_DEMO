@@ -51,6 +51,12 @@ namespace PRAKTIKA4_KYRS_DEMO
             this.Close();
             moder.Show();
         }
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            MainWindow moder = new MainWindow();
+            this.Close();
+            moder.Show();
+        }
     }
     
 }

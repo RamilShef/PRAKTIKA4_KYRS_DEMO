@@ -5,95 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PRAKTIKA4_KYRS_DEMO"
         mc:Ignorable="d"
-        Title="Главное окно системы" MinHeight="600" MinWidth="1000"
+        Title="Главное окно системы" MinHeight="500" MinWidth="800"
         WindowStartupLocation="CenterScreen"
         Background="#f9f9f9">
-
-    <Window.Resources>
-        
-        <x:Array x:Key="Events" Type="{x:Type StackPanel}">
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Image Source="Image/foto.jpg" Width="70" Height="70" Margin="0,0,10,0"/>
-                <StackPanel>
-                    <TextBlock Text="IT Конференция" FontSize="16" FontWeight="Bold"/>
-                    <TextBlock Text="Направление: Технологии" Foreground="Gray"/>
-                    <TextBlock Text="Дата: 05.12.2025" Foreground="Gray"/>
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Image Source="Image/foto.jpg" Width="70" Height="70" Margin="0,0,10,0"/>
-                <StackPanel>
-                    <TextBlock Text="Бизнес Форум" FontSize="16" FontWeight="Bold"/>
-                    <TextBlock Text="Направление: Экономика" Foreground="Gray"/>
-                    <TextBlock Text="Дата: 20.11.2025" Foreground="Gray"/>
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Image Source="Image/foto.jpg" Width="70" Height="70" Margin="0,0,10,0"/>
-                <StackPanel>
-                    <TextBlock Text="Хакатон" FontSize="16" FontWeight="Bold"/>
-                    <TextBlock Text="Направление: Технологии" Foreground="Gray"/>
-                    <TextBlock Text="Дата: 25.11.2025" Foreground="Gray"/>
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Image Source="Image/foto.jpg" Width="70" Height="70" Margin="0,0,10,0"/>
-                <StackPanel>
-                    <TextBlock Text="Арт-Выставка" FontSize="16" FontWeight="Bold"/>
-                    <TextBlock Text="Направление: Искусство" Foreground="Gray"/>
-                    <TextBlock Text="Дата: 10.12.2025" Foreground="Gray"/>
-                </StackPanel>
-            </StackPanel>
-        </x:Array>
-    </Window.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10" VerticalAlignment="Center">
-            <TextBlock Text="Мероприятия" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"/>
-            <ComboBox x:Name="cmbDirections" Width="200" Margin="20,0,0,0" VerticalAlignment="Center">
-                <ComboBoxItem Content="Все направления" IsSelected="True"/>
-                <ComboBoxItem Content="Технологии"/>
-                <ComboBoxItem Content="Экономика"/>
-                <ComboBoxItem Content="Искусство"/>
-            </ComboBox>
-            <ComboBox x:Name="cmbDateFilter" Width="200" Margin="20,0,0,0" VerticalAlignment="Center">
-                <ComboBoxItem Content="Все даты" IsSelected="True"/>
-                <ComboBoxItem Content="Сегодня"/>
-                <ComboBoxItem Content="На этой неделе"/>
-                <ComboBoxItem Content="В этом месяце"/>
-                <ComboBoxItem Content="Предстоящие"/>
-                <ComboBoxItem Content="Прошедшие"/>
-            </ComboBox>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="10" VerticalAlignment="Center">
+            <TextBlock Text="Мероприятия" FontSize="22" Margin="10" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10" VerticalAlignment="Center">
+                <ComboBox x:Name="cmbDirections" Width="200" Margin="20,0,0,0" VerticalAlignment="Center"
+                         SelectionChanged="cmbDirections_SelectionChanged">
+                    <ComboBoxItem Content="Все направления" IsSelected="True"/>
+                </ComboBox>
+                <ComboBox x:Name="cmbDateFilter" Width="200" Margin="20,0,0,0" VerticalAlignment="Center"
+                         SelectionChanged="cmbDateFilter_SelectionChanged">
+                    <ComboBoxItem Content="Все даты" IsSelected="True"/>
+                    <ComboBoxItem Content="Сегодня"/>
+                    <ComboBoxItem Content="На этой неделе"/>
+                    <ComboBoxItem Content="В этом месяце"/>
+                    <ComboBoxItem Content="Предстоящие"/>
+                    <ComboBoxItem Content="Прошедшие"/>
+                </ComboBox>
 
-            
-            <DatePicker x:Name="dpSpecificDate" Width="150" Margin="10,0,0,0" 
-                       VerticalAlignment="Center" 
-                       ToolTip="Выберите конкретную дату для фильтрации"
-                       IsEnabled="False"/>
-
-            <Button Content="Войти" Width="100" Height="30" Margin="20,0,0,0" x:Name="Voiti"
-                    Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50"
-                    Click="Voiti_Click"/>
+            </StackPanel>
         </StackPanel>
 
-
         <ScrollViewer Grid.Row="1">
-            <ItemsControl ItemsSource="{StaticResource Events}">
+            <ItemsControl x:Name="EventsList">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentPresenter Content="{Binding}"/>
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <Image Source="{Binding LogoPath}" Width="70" Height="70" Margin="0,0,10,0"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding NameEvent}" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding DirectionName}" Foreground="Gray"/>
+                                <TextBlock Text="{Binding Date}" Foreground="Gray"/>
+                            </StackPanel>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+
+        <Button Grid.Row="2" Content="Войти" Width="100" Height="30" Margin="0,20,0,0" HorizontalAlignment="Right" x:Name="Enter"
+                Background="#4CAF50" Foreground="White"
+                Click="Enter_Click"/>
     </Grid>
 </Window>
