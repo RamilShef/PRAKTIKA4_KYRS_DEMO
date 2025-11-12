@@ -5,17 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PRAKTIKA4_KYRS_DEMO"
         mc:Ignorable="d"
-        Title="Профиль" MinHeight="550" MinWidth="900"
-         WindowStartupLocation="CenterScreen">
-    <Grid ShowGridLines="True">
+       Title="Профиль" MinHeight="450" MinWidth="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Профиль" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <DataGrid Grid.Row="1" />
-        <Button Grid.Row="2"  Content="Назад" Height="50" Width="70" Click="Button_Click" Margin="10"/>
+
+        <Label Grid.Row="0" Content="Профиль" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <DataGrid Grid.Row="1" 
+                  Margin="10"
+                  x:Name="profileDataGrid"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  Background="White"
+                  BorderBrush="LightGray"
+                  BorderThickness="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Поле" Binding="{Binding FieldName}" Width="200"/>
+                <DataGridTextColumn Header="Значение" Binding="{Binding FieldValue}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="2"  Content="Назад" Width="100" Height="30"  Click="Button_Click" Margin="10"/>
 
     </Grid>
 </Window>

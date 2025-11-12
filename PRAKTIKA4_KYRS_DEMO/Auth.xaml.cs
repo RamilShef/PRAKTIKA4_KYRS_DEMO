@@ -21,7 +21,7 @@ namespace PRAKTIKA4_KYRS_DEMO
         public Auth()
         {
             InitializeComponent();
-            //LoadSavedCredentials();
+            LoadSavedCredentials();
         }
 
         private void LoadSavedCredentials()
@@ -58,7 +58,7 @@ namespace PRAKTIKA4_KYRS_DEMO
                 if (chkRememberMe.IsChecked == true)
                 {
                     File.WriteAllLines(credentialsFilePath, new string[] { userId, password });
-                    MessageBox.Show($"Данные сохранены в файл:\n{credentialsFilePath}");
+                    //MessageBox.Show($"Данные сохранены в файл:\n{credentialsFilePath}");
                 }
                 else
                 {
@@ -175,7 +175,7 @@ namespace PRAKTIKA4_KYRS_DEMO
                     failedAttempts = 0;
                     captchaPanel.Visibility = Visibility.Collapsed;
 
-                    //SaveCredentials(id, password);
+                    SaveCredentials(id, password);
 
                 
                     OpenUserWindow(user);

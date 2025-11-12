@@ -75,7 +75,7 @@
                 <Button Content="⟳" Width="28" Height="25" Click="RefreshCaptcha_Click"/>
             </StackPanel>
 
-            <!-- Кнопки -->
+          
             <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
                 <Button x:Name="btnLogin" 
                         Content="Вход" 

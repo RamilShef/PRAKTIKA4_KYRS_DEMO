@@ -24,6 +24,7 @@ namespace PRAKTIKA4_KYRS_DEMO
             InitializeComponent();
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OrganizerWindow organizerWindow = new OrganizerWindow();

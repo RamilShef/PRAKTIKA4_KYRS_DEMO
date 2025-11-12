@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PRAKTIKA4_KYRS_DEMO.BD;
+using PRAKTIKA4_KYRS_DEMO.BD.MODELS;
 
 namespace PRAKTIKA4_KYRS_DEMO
 {
@@ -19,9 +21,11 @@ namespace PRAKTIKA4_KYRS_DEMO
     /// </summary>
     public partial class OrganizerWindow : Window
     {
+       // private User currentUser;
         public OrganizerWindow()
         {
             InitializeComponent();
+            //currentUser = user;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

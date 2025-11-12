@@ -110,6 +110,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="BD\MODELS\EventViewModel.cs" />
+    <Compile Include="BD\MODELS\PlayerViewModel.cs" />
+    <Compile Include="BD\MODELS\ProfileField.cs" />
     <Compile Include="BD\Role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
