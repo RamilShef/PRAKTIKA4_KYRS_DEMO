@@ -5,17 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PRAKTIKA4_KYRS_DEMO"
         mc:Ignorable="d"
-        Title="Мероприятие" MinHeight="650" MinWidth="900"
-         WindowStartupLocation="CenterScreen">
-    <Grid ShowGridLines="True">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Мероприятия" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <DataGrid Grid.Row="1" />
-            <Button Grid.Row="2"  Content="Назад" Height="50" Width="70" Click="Button_Click" Margin="10"/>
+          Title="Окно модератора" MinHeight="450" MinWidth="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-        </Grid>
+        <Label Grid.Row="0" Content="Добро пожаловать, модератор" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <DataGrid Grid.Row="1" />
+        <Button Grid.Row="2"  Content="Назад" Width="100" Height="30"  Click="Button_Click" Margin="10"/>
+
+    </Grid>
 </Window>

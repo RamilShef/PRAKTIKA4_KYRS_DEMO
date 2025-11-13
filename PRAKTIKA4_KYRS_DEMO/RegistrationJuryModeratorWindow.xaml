@@ -1,6 +1,7 @@
 ﻿<Window x:Class="PRAKTIKA4_KYRS_DEMO.RegistrationJuryModeratorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="Добавление жюри/модератора" MinHeight="550" MinWidth="900"
         Background="White"
         WindowStartupLocation="CenterScreen">
@@ -32,6 +33,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -90,6 +92,10 @@
                 <ComboBoxItem Content="IT Конференция"/>
                 <ComboBoxItem Content="Бизнес Форум"/>
             </ComboBox>
+            <!-- Дата рождения -->
+            <TextBlock Text="Дата рождения:" Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+            <DatePicker x:Name="dpDOB" Grid.Row="9" Grid.Column="1" Margin="0,5" SelectedDate="{x:Static sys:DateTime.Now}"/>
+
         </Grid>
 
         <!-- Правая часть формы -->

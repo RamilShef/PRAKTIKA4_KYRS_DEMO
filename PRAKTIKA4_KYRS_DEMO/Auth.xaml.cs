@@ -128,7 +128,6 @@ namespace PRAKTIKA4_KYRS_DEMO
                 return;
             }
 
-            // Проверка капчи
             if (captchaPanel.Visibility == Visibility.Visible)
             {
                 if (!CheckCaptcha())
@@ -147,7 +146,6 @@ namespace PRAKTIKA4_KYRS_DEMO
                 }
             }
 
-            // Попытка входа
             try
             {
                 if (!int.TryParse(id, out int userId))

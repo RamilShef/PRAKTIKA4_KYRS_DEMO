@@ -89,110 +89,108 @@ namespace PRAKTIKA4_KYRS_DEMO
         // Кнопка "Отмена"
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            OrganizerWindow organizerWindow = new OrganizerWindow();
             this.Close();
+            organizerWindow.Show();
         }
 
-        // Кнопка "OK" — добавить пользователя
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+private void Button_Click_1(object sender, RoutedEventArgs e)
+{
+    if (!ValidateData()) return;
+
+    try
+    {
+        using (var db = new Praktika2222Entities())
         {
-            if (!ValidateData()) return;
+            string savedImagePath = "";
+            string projectImagesDir = @"C:\Users\ssefy\Desktop\PRAKTIKA4_KYRS_DEMO\PRAKTIKA4_KYRS_DEMO\Image\";
 
-            try
+            if (!string.IsNullOrEmpty(photoPath))
             {
-                using (var db = new Praktika2222Entities())
-                {
-                    string savedImagePath = "";
+                if (!Directory.Exists(projectImagesDir))
+                    Directory.CreateDirectory(projectImagesDir);
 
-                    // 📂 Путь к фото (оставь пустым — вставь свой позже)
-                    string projectImagesDir = @"C:\Users\ssefy\Desktop\PRAKTIKA4_KYRS_DEMO\PRAKTIKA4_KYRS_DEMO\Image\";
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(photoPath)}";
+                string newFilePath = Path.Combine(projectImagesDir, fileName);
+                File.Copy(photoPath, newFilePath, true);
+                savedImagePath = fileName;
+            }
 
-                    if (!string.IsNullOrEmpty(photoPath))
-                    {
-                        if (!Directory.Exists(projectImagesDir))
-                            Directory.CreateDirectory(projectImagesDir);
+            string password = pwdPassword.Visibility == Visibility.Visible
+                ? pwdPassword.Password
+                : txtPasswordVisible.Text;
 
-                        string fileName = $"{Guid.NewGuid()}{Path.GetExtension(photoPath)}";
-                        string newFilePath = Path.Combine(projectImagesDir, fileName);
-                        File.Copy(photoPath, newFilePath, true);
-                        savedImagePath = fileName;
-                    }
+            // Определяем выбранный пол
+            var genderText = (cmbGender.SelectedItem as ComboBoxItem)?.Content.ToString();
+            var genderFromDb = db.Gender.FirstOrDefault(g => g.GenderName == genderText);
 
-                    string password = pwdPassword.Visibility == Visibility.Visible
-                        ? pwdPassword.Password
-                        : txtPasswordVisible.Text;
+            // Создаём пользователя
+            User newUser = new User
+            {
+                ID = GetNextUserID(),
+                FIO = txtFIO.Text,
+                Email = txtEmail.Text,
+                Phone = txtPhone.Text,
+                Image = savedImagePath,
+                Password = HashPassword(password),
+                DOB = dpDOB.SelectedDate ?? DateTime.Now
+            };
 
-                    // Определяем выбранный пол
-                    var genderText = (cmbGender.SelectedItem as ComboBoxItem)?.Content.ToString();
-                    var genderFromDb = db.Gender.FirstOrDefault(g => g.GenderName == genderText);
+            if (genderFromDb != null && !newUser.Gender.Contains(genderFromDb))
+                newUser.Gender.Add(genderFromDb);
 
-                    // Создаем пользователя
-                    User newUser = new User
-                    {
-                        ID = int.Parse(txtID.Text),
-                        FIO = txtFIO.Text,
-                        Email = txtEmail.Text,
-                        Phone = txtPhone.Text,
-                        Image = savedImagePath,
-                        Password = HashPassword(password)
-                    };
+            if (!string.IsNullOrWhiteSpace(txtDirection.Text))
+            {
+                var dir = db.Direction.FirstOrDefault(d => d.DirectionName == txtDirection.Text);
 
-                    // Привязка пола
-                    // Привязка пола (для связи M:N)
-                    if (genderFromDb != null)
-                    {
-                        newUser.Gender.Add(genderFromDb);
-                    }
-
-
-                    // Направление
-                    if (!string.IsNullOrWhiteSpace(txtDirection.Text))
-                    {
-                        var dir = db.Direction.FirstOrDefault(d => d.DirectionName == txtDirection.Text);
                         if (dir == null)
                         {
-                            dir = new Direction { DirectionName = txtDirection.Text };
+                            int nextDirId = db.Direction.Any() ? db.Direction.Max(d => d.ID) + 1 : 1;
+                            dir = new Direction
+                            {
+                                ID = nextDirId,
+                                DirectionName = txtDirection.Text
+                            };
                             db.Direction.Add(dir);
                             db.SaveChanges();
                         }
-                        newUser.Direction.Add(dir);
-                    }
 
-                    // Роль (M:N)
-                    var selectedRole = cmbRole.SelectedItem as Role;
-                    if (selectedRole != null)
-                    {
-                        var roleInDb = db.Role.FirstOrDefault(r => r.ID == selectedRole.ID);
-                        if (roleInDb != null)
-                            newUser.Role.Add(roleInDb);
-                    }
-
-                    // Прикрепление к мероприятию (если включено)
-                    if (chkAttachEvent.IsChecked == true && cmbEvent.SelectedItem is ComboBoxItem eventItem)
-                    {
-                        string eventName = eventItem.Content.ToString();
-                        var ev = db.Event.FirstOrDefault(eve => eve.NameEvent == eventName);
-                        if (ev != null)
-                            newUser.Event.Add(ev);
-                    }
-
-                    db.User.Add(newUser);
-                    db.SaveChanges();
-
-                    MessageBox.Show("Пользователь успешно добавлен!");
-                    new OrganizerWindow().Show();
-                    this.Close();
-                }
+                        if (!newUser.Direction.Contains(dir))
+                    newUser.Direction.Add(dir);
             }
-            catch (Exception ex)
+
+            var selectedRole = cmbRole.SelectedItem as Role;
+            if (selectedRole != null)
             {
-                // 🧩 Показываем реальную причину
-                string inner = ex.InnerException?.InnerException?.Message ?? ex.InnerException?.Message ?? ex.Message;
-                MessageBox.Show($"Ошибка при сохранении:\n{inner}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                var roleInDb = db.Role.FirstOrDefault(r => r.ID == selectedRole.ID);
+                if (roleInDb != null && !newUser.Role.Contains(roleInDb))
+                    newUser.Role.Add(roleInDb);
             }
+
+            // Мероприятие
+            if (chkAttachEvent.IsChecked == true && cmbEvent.SelectedItem is ComboBoxItem eventItem)
+            {
+                string eventName = eventItem.Content.ToString();
+                var ev = db.Event.FirstOrDefault(eve => eve.NameEvent == eventName);
+                if (ev != null && !newUser.Event.Contains(ev))
+                    newUser.Event.Add(ev);
+            }
+
+            db.User.Add(newUser);
+            db.SaveChanges();
+
+            MessageBox.Show("Пользователь успешно добавлен!");
+            new OrganizerWindow().Show();
+            this.Close();
         }
+    }
+    catch (Exception ex)
+    {
+        string inner = ex.InnerException?.InnerException?.Message ?? ex.InnerException?.Message ?? ex.Message;
+        MessageBox.Show($"Ошибка при сохранении:\n{inner}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+}
 
-
-        // Проверка введённых данных
         private bool ValidateData()
         {
             string password = pwdPassword.Visibility == Visibility.Visible ? pwdPassword.Password : txtPasswordVisible.Text;
@@ -231,7 +229,6 @@ namespace PRAKTIKA4_KYRS_DEMO
             return true;
         }
 
-        // Показ / скрытие пароля
         private void chkShowPassword_Checked(object sender, RoutedEventArgs e)
         {
             txtPasswordVisible.Text = pwdPassword.Password;
@@ -252,7 +249,6 @@ namespace PRAKTIKA4_KYRS_DEMO
             pwdConfirm.Visibility = Visibility.Visible;
         }
 
-        // Хеширование пароля
         private string HashPassword(string password)
         {
             using (SHA256 sha = SHA256.Create())

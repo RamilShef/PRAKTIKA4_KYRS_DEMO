@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Praktika2222Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Praktika2222Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="ID" />
@@ -115,7 +115,7 @@
           <Property Name="DOB" Type="date" Nullable="false" />
           <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="User_Country">
           <Key>
@@ -529,8 +529,7 @@
             <End Role="User_Role" EntitySet="User_Role" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Praktika2222Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -660,7 +659,7 @@
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Activity_Event" Relationship="Self.FK_Activity_Event_User" FromRole="User" ToRole="Activity_Event" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Event_User" FromRole="User" ToRole="Event" />
           <NavigationProperty Name="Event_Activity_Jury" Relationship="Self.FK_Event_Activity_Jury_User" FromRole="User" ToRole="Event_Activity_Jury" />

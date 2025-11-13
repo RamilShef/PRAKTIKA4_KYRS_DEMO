@@ -20,12 +20,14 @@ namespace PRAKTIKA4_KYRS_DEMO.BD
             : base("name=Praktika2222Entities")
         {
         }
-        public static Praktika2222Entities Getcontext() {
-            if (_context== null)
+        public static Praktika2222Entities Getcontext()
+        {
+            if (_context == null)
                 _context = new Praktika2222Entities();
             return _context;
         }
-    
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
