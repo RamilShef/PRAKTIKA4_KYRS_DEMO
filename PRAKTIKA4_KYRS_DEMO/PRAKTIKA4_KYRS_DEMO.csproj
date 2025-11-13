@@ -133,6 +133,7 @@
     <Compile Include="RegistrationJuryModeratorWindow.xaml.cs">
       <DependentUpon>RegistrationJuryModeratorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BD\Session.cs" />
     <Compile Include="Ychastniki.xaml.cs">
       <DependentUpon>Ychastniki.xaml</DependentUpon>
     </Compile>

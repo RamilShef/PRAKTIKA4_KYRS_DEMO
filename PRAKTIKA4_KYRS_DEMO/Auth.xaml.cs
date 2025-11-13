@@ -166,7 +166,7 @@ namespace PRAKTIKA4_KYRS_DEMO
 
                 if (user != null)
                 {
-        
+                    Session.CurrentUser = user;
                     if (!isAutoLogin)
                         MessageBox.Show("Вход успешен!");
 
@@ -245,7 +245,7 @@ namespace PRAKTIKA4_KYRS_DEMO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при открытии окна: {ex.Message}");
+                Console.WriteLine($"Ошибка при открытии окна: {ex.Message}");
             }
         }
 

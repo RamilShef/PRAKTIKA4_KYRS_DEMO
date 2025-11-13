@@ -1,66 +1,141 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using PRAKTIKA4_KYRS_DEMO.BD;
 using PRAKTIKA4_KYRS_DEMO.BD.MODELS;
 
 namespace PRAKTIKA4_KYRS_DEMO
 {
-    /// <summary>
-    /// Логика взаимодействия для OrganizerWindow.xaml
-    /// </summary>
     public partial class OrganizerWindow : Window
     {
-       // private User currentUser;
+        private readonly Praktika2222Entities db = new Praktika2222Entities();
+
         public OrganizerWindow()
         {
             InitializeComponent();
-            //currentUser = user;
+            InitializeUserData();
+            LoadUserPhoto();
+        }
+
+        private void InitializeUserData()
+        {
+            string greeting = GetTimeBasedGreeting();
+            string userName = "Организатор";
+
+            if (Session.IsLoggedIn)
+                userName = GetUserName(Session.CurrentUser.FIO);
+
+            UpdateGreetingText(greeting, userName);
+        }
+
+        private void LoadUserPhoto()
+        {
+            try
+            {
+                // Стандартное фото по умолчанию
+                string defaultPath = @"C:\Users\ssefy\Desktop\PRAKTIKA4_KYRS_DEMO\PRAKTIKA4_KYRS_DEMO\Image\._11.jpg";
+                string userImagePath = defaultPath;
+
+                if (Session.IsLoggedIn && !string.IsNullOrWhiteSpace(Session.CurrentUser.Image))
+                {
+                    // Если в БД указано имя файла или путь — пытаемся использовать его
+                    string possiblePath = Session.CurrentUser.Image;
+
+                    if (!Path.IsPathRooted(possiblePath))
+                    {
+                        string projectPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Image", "Organizator");
+                        possiblePath = Path.Combine(projectPath, Path.GetFileName(Session.CurrentUser.Image));
+                    }
+
+                    // Если файл существует — используем его
+                    if (File.Exists(possiblePath))
+                        userImagePath = possiblePath;
+                }
+
+                // Если файл существует — устанавливаем картинку
+                if (File.Exists(userImagePath))
+                {
+                    if (Session.IsLoggedIn && !string.IsNullOrWhiteSpace(Session.CurrentUser.Image)) ;
+                }
+                else
+                {
+                    // На случай, если даже стандартное фото не найдено
+                    MessageBox.Show($"Фото не найдено: {userImagePath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке фото: {ex.Message}");
+            }
+        }
+
+
+        private string GetTimeBasedGreeting()
+        {
+            int hour = DateTime.Now.Hour;
+
+            if (hour >= 9 && hour <= 11)
+                return "Доброе утро";
+            else if (hour >= 11 && hour <= 18)
+                return "Добрый день";
+            else if (hour >= 18 && hour <= 24)
+                return "Добрый вечер";
+            else
+                return "Добро пожаловать";
+        }
+
+        private string GetUserName(string fullName)
+        {
+            if (!string.IsNullOrEmpty(fullName))
+            {
+                string[] nameParts = fullName.Split(' ');
+                if (nameParts.Length > 0)
+                    return nameParts[0];
+            }
+            return "Пользователь";
+        }
+
+        private void UpdateGreetingText(string greeting, string userName)
+        {
+            txtGreeting.Text = greeting;
+            txtUserName.Text = userName;
+        }
+
+        private void Event_Click(object sender, RoutedEventArgs e)
+        {
+            Moderatop window = new Moderatop();
+            this.Close();
+            window.Show();
+        }
+
+        private void Player_Click(object sender, RoutedEventArgs e)
+        {
+            Ychastniki window = new Ychastniki();
+            this.Close();
+            window.Show();
+        }
+
+        private void Juri_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationJuryModeratorWindow window = new RegistrationJuryModeratorWindow();
+            this.Close();
+            window.Show();
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            Profil profil = new Profil();
+            this.Close();
+            profil.Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Moderatop moder = new Moderatop();
+            Session.Logout(); // выход
+            MainWindow mainWindow = new MainWindow();
             this.Close();
-            moder.Show();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Ychastniki moder = new Ychastniki();
-            this.Close();
-            moder.Show();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            RegistrationJuryModeratorWindow moder = new RegistrationJuryModeratorWindow();
-            this.Close();
-            moder.Show();
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            Profil moder = new Profil();
-            this.Close();
-            moder.Show();
-        }
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            MainWindow moder = new MainWindow();
-            this.Close();
-            moder.Show();
+            mainWindow.Show();
         }
     }
-    
 }

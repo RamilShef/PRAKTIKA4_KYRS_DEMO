@@ -5,18 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PRAKTIKA4_KYRS_DEMO"
         mc:Ignorable="d"
-          Title="Окно модератора" MinHeight="450" MinWidth="800"
+            Title="Мероприятия" MinHeight="450" MinWidth="800"
         WindowStartupLocation="CenterScreen">
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-
-        <Label Grid.Row="0" Content="Добро пожаловать, модератор" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <DataGrid Grid.Row="1" />
-        <Button Grid.Row="2"  Content="Назад" Width="100" Height="30"  Click="Button_Click" Margin="10"/>
-
+        <Label Grid.Row="0" Content="Мероприятия" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl x:Name="EventsList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel  Margin="5">
+                            <Image Source="{Binding LogoPath}" Width="70" Height="70" Margin="0,0,10,0"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding NameEvent}" FontSize="16" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding DirectionName}" Foreground="Gray"/>
+                                <TextBlock Text="{Binding Date}" Foreground="Gray"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button Grid.Row="2" Content="Назад" Click="Button_Click" Margin="10"/>
     </Grid>
 </Window>
