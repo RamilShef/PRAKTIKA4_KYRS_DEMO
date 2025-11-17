@@ -15,13 +15,14 @@ namespace PRAKTIKA4_KYRS_DEMO
 {
     public partial class RegistrationJuryModeratorWindow : Window
     {
-        private string photoPath = ""; // путь к выбранному фото
+        private string photoPath = "";
 
         public RegistrationJuryModeratorWindow()
         {
             InitializeComponent();
             SetNextUserIDToTextBox();
             LoadRoles();
+            Application.Current.Shutdown();
         }
 
         // Получить следующий ID
@@ -60,7 +61,7 @@ namespace PRAKTIKA4_KYRS_DEMO
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при загрузке ролей: {ex.Message}");
+                Console.WriteLine($"Ошибка при загрузке ролей: {ex.Message}");
             }
         }
 
