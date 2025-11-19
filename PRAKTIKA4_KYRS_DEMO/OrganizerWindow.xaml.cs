@@ -118,9 +118,9 @@ namespace PRAKTIKA4_KYRS_DEMO
 
         private void Juri_Click(object sender, RoutedEventArgs e)
         {
-            RegistrationJuryModeratorWindow window = new RegistrationJuryModeratorWindow();
+            RegistrationJuryModeratorWindow w = new RegistrationJuryModeratorWindow();
             this.Close();
-            window.Show();
+            w.Show();
         }
 
         private void Profile_Click(object sender, RoutedEventArgs e)
