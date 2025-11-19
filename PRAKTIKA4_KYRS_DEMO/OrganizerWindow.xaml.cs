@@ -136,6 +136,7 @@ namespace PRAKTIKA4_KYRS_DEMO
             MainWindow mainWindow = new MainWindow();
             this.Close();
             mainWindow.Show();
+            //
         }
     }
 }
